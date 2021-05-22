@@ -38,9 +38,9 @@ public class Map {
         }
         pathMap[a[0]][a[1]] = 1;
         pathMap[b[0]][b[1]] = 2;
-        for (int[] row : pathMap){
+       /* for (int[] row : pathMap){
             System.out.println(Arrays.toString(row));
-        }
+        }*/
         return Path.isPath(pathMap,31);
     }
 

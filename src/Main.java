@@ -1,5 +1,6 @@
 
 import IA.Joueur;
+import IA.Livreur;
 import map.Map;
 import network.Network;
 
@@ -17,7 +18,13 @@ public class Main {
         idTeam = network.waitStart();
         Joueur ia = new Joueur();
         map.createMap(network.getMap());
+
+
+        ia.fetchBikers();
+        Livreur livreur = ia.getLivreurs(0);
+/*
         ArrayList<int[]> path = map.findPath(new Integer[]{0, 6},new Integer[]{6,9});
+*/
 
 
     }
