@@ -27,12 +27,13 @@ public class Network {
         if (str.equals("NAME")){
             name("LaSekt");
         }
-        waitStart();
     }
 
-    public void waitStart() throws IOException {
+    public int waitStart() throws IOException {
         String fromServer = reader.readLine();
         System.out.println(fromServer);
+        return
+
     }
 
 

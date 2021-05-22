@@ -6,5 +6,6 @@ public class Main {
     public static void main(String args[]) throws IOException {
         Network network = new Network();
         network.init();
+        int idTeam = network.waitStart();
     }
 }
