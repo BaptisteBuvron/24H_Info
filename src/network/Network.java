@@ -39,11 +39,13 @@ public class Network {
     }
 
 
+
     public void move(int nPlayer, String direction) throws IOException {
 
 
             writer.println("MOVE|"+nPlayer+"|"+direction);
             String str = reader.readLine();
+            System.out.println(str);
 
     }
 
@@ -66,6 +68,25 @@ public class Network {
 //		System.out.println("Debug : " + str);
 		return str;
 	}
+
+    public String take(int livreur, int commande) throws IOException {
+        writer.println("TAKE|" + livreur+"|"+commande);
+        String str = reader.readLine();
+//		System.out.println("Debug : " + str);
+        return str;
+    }
+
+    public String deliver(int livreur, int commande) throws IOException {
+        writer.println("DELIVER|" + livreur+"|"+commande);
+        String str = reader.readLine();
+//		System.out.println("Debug : " + str);
+        return str;
+    }
+
+	public void endTurn() throws IOException {
+        writer.println("ENDTURN");
+        String str = reader.readLine();
+    }
 
 	public Order[] getOrders() throws IOException {
 		writer.println("GETDELIVERIES|");
