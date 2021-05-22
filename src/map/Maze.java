@@ -16,6 +16,7 @@ public class Maze {
     public static ArrayList minDistance(char[][] grid) {
         System.out.println("Calcul plus cours chemins");
         QItem source = new QItem(0, 0,null, 0);
+        path = new ArrayList<>();
 
         // To keep track of visited QItems. Marking
         // blocked cells as visited.
@@ -45,6 +46,7 @@ public class Maze {
             // Destination found;
             if (grid[p.row][p.col] == 'd'){
                 QItem prev = p.prevQItem;
+                //path.add(new int[]{p.row,p.col});
                 while (prev.prevQItem != null){
                     System.out.println(prev);
                     path.add(new int[]{prev.row,prev.col});

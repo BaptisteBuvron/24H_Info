@@ -108,7 +108,7 @@ public class Livreur {
             System.out.println("La commande a été prise");
             /*posX = path.get(path.size() - 2)[0];
             posY = path.get(path.size() - 2)[0];*/
-            path = Main.map.findPath(new Integer[]{posX, posY}, new Integer[]{order.destX, order.destY});
+            path = Main.map.findPath2(new Integer[]{posX, posY}, new Integer[]{order.destX, order.destY});
             System.out.println("Livrer la commande chez le client");
             goToDeliverLocation();
 
