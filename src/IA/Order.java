@@ -1,19 +1,20 @@
 package IA;
 
 public class Order {
-	int id, sourceX, sourceY, destX, destY, value, maxRound;
+	int id, sourceX, sourceY, destX, destY, maxRound;
+	float value;
 
-	public Order(int id, int sourceX, int sourceY, int destX, int destY, int value, int maxRound) {
+	public Order(int id, float f, int sourceX, int sourceY, int destX, int destY, int maxRound) {
 		this.id = id;
 		this.sourceX = sourceX;
 		this.sourceY = sourceY;
 		this.destX = destX;
 		this.destY = destY;
-		this.value = value;
+		this.value = f;
 		this.maxRound = maxRound;
 	}
-	
+
 	public void deliver() {
-		//send request to deliver order
+		// send request to deliver order
 	}
 }
