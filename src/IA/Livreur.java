@@ -81,6 +81,7 @@ public class Livreur {
 
         for (int[] coord : path) {
             String dir = null;
+            System.out.println("Déplacement : "+coord[0]+";"+coord[1]);
             if (posX > coord[0]) {
                 dir = "T";
                 posX--;
@@ -96,26 +97,25 @@ public class Livreur {
             }
 
             if (dir != null) {
-                if (Joueur.nbTour < 1) {
-                    Main.network.endTurn();
-                    Main.network.waitStart();
-                    Joueur.nbTour = 8;
-                }
+                checkTour();
                 Main.network.move(0, dir);
                 Joueur.nbTour--;
             }
         }
-
+        checkTour();
         if (Main.network.take(id, order.id).equals("OK")) {
+            Joueur.nbTour--;
             System.out.println("La commande a été prise");
             /*posX = path.get(path.size() - 2)[0];
             posY = path.get(path.size() - 2)[0];*/
             path = Main.map.findPath(new Integer[]{posX, posY}, new Integer[]{order.destX, order.destY});
-            System.out.println("Livrer la commande");
+            System.out.println("Livrer la commande chez le client");
             goToDeliverLocation();
+
 
         } else {
             Main.network.deliver(id, order.id);
+            Joueur.nbTour--;
             System.out.println("Commande livrée !");
             path = null;
         }
@@ -123,6 +123,14 @@ public class Livreur {
 
 
 
+    }
+
+    public void checkTour() throws IOException {
+        if (Joueur.nbTour < 1) {
+            Main.network.endTurn();
+            Main.network.waitStart();
+            Joueur.nbTour = 8;
+        }
     }
 
     public int getPosX() {

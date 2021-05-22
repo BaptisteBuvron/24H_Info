@@ -32,7 +32,10 @@ public class Main {
 		Livreur livreur = ia.getLivreurs(0);
 
 		for (Order order: orders) {
-			ArrayList<int[]> path = map.findPath(new Integer[]{livreur.getPosX(), livreur.getPosY()},new Integer[]{order.sourceX,order.sourceY});
+			ArrayList<int[]> path = map.findPath2(new Integer[]{livreur.getPosX(), livreur.getPosY()},new Integer[]{order.sourceX,order.sourceY});
+			for (int[] c: path) {
+			System.out.println(c[0]+";"+c[1]);
+			}
 			livreur.setPath(path);
 			livreur.setOrder(order);
 			livreur.goToDeliverLocation();
