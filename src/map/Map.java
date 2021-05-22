@@ -23,4 +23,24 @@ public class Map {
             System.out.println(Arrays.toString(row));
         }
     }
+
+    public void findPath(Integer[] a,Integer[] b){
+        int[][] pathMap = new int[31][31];
+        for (int i = 0; i < 31; i++) {
+            for (int j = 0; j < 31; j++) {
+                if (!map[i][j].equals("R")){
+                    pathMap[i][j] = 0;
+                }else {
+                    pathMap[i][j] = 3;
+                }
+            }
+        }
+        pathMap[a[0]][a[1]] = 1;
+        pathMap[b[0]][b[1]] = 2;
+        for (int[] row : pathMap){
+            System.out.println(Arrays.toString(row));
+        }
+        Path.isPath(pathMap,31);
+    }
+
 }

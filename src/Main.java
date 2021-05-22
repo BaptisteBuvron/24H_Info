@@ -11,6 +11,6 @@ public class Main {
         network.init();
         int idTeam = network.waitStart();
         map.createMap(network.getMap());
-        map.displayMap();
+        map.findPath(new Integer[]{0, 6},new Integer[]{6,9});
     }
 }
