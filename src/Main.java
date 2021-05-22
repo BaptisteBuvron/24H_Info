@@ -7,5 +7,6 @@ public class Main {
         Network network = new Network();
         network.init();
         int idTeam = network.waitStart();
+        network.getMap();
     }
 }

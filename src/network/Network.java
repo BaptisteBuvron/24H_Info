@@ -39,15 +39,20 @@ public class Network {
 
     public void move(int nPlayer, String direction) throws IOException {
 
-        try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
+
             writer.println("MOVE|"+nPlayer+"|"+direction);
             String str = reader.readLine();
-            reader.close();
-        }
+
     }
 
     public void name(String name) throws IOException {
         writer.println(name);
+    }
+
+    public void getMap() throws IOException {
+        writer.println("GETMAP");
+        String str = reader.readLine();
+        System.out.println(str);
     }
 
 
