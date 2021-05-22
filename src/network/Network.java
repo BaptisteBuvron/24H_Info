@@ -5,55 +5,60 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
 import IA.Main;
 import IA.Order;
 
 public class Network {
 
-	private Socket socket;
+    private Socket socket;
 
-	private BufferedReader reader;
-	private InputStreamReader streamReader;
-	private PrintWriter writer;
+    private BufferedReader reader;
+    private InputStreamReader streamReader;
+    private PrintWriter writer;
 
-	public Network() throws IOException {
-		this.socket = new Socket("127.0.0.1", 2121);
-		streamReader = new InputStreamReader(socket.getInputStream());
-		reader = new BufferedReader(streamReader);
-		writer = new PrintWriter(socket.getOutputStream(), true);
-	}
+    public Network() throws IOException {
+        this.socket = new Socket("127.0.0.1", 2121);
+        streamReader = new InputStreamReader(socket.getInputStream());
+        reader = new BufferedReader(streamReader);
+        writer = new PrintWriter(socket.getOutputStream(), true);
+    }
 
-	public void init() throws IOException {
-		String str = reader.readLine();
-		System.out.println(str);
-		if (str.equals("NAME")) {
-			name("LaSekt");
-		}
-	}
+    public void init() throws IOException {
+        String str = reader.readLine();
+        System.out.println(str);
+        if (str.equals("NAME")){
+            name("LaSekt");
+        }
+    }
 
-	public int waitStart() throws IOException {
-		String fromServer = reader.readLine();
-//        System.out.println(fromServer);
-		return Integer.parseInt(fromServer.substring(fromServer.length() - 1));
-	}
+    public int waitStart() throws IOException {
+        String fromServer = reader.readLine();
+        System.out.println(fromServer);
+        return Integer.parseInt(fromServer.substring(fromServer.length() -1));
 
-	public void move(int nPlayer, String direction) throws IOException {
+    }
 
-		writer.println("MOVE|" + nPlayer + "|" + direction);
-		reader.readLine();
 
-	}
+    public void move(int nPlayer, String direction) throws IOException {
 
-	public void name(String name) throws IOException {
-		writer.println(name);
-	}
 
-	public void getMap() throws IOException {
-		writer.println("GETMAP");
-		String str = reader.readLine();
-		System.out.println(str);
-	}
+            writer.println("MOVE|"+nPlayer+"|"+direction);
+            String str = reader.readLine();
+
+    }
+
+    public void name(String name) throws IOException {
+        writer.println(name);
+    }
+
+    public String getMap() throws IOException {
+        writer.println("GETMAP");
+        String str = reader.readLine();
+        System.out.println(str);
+        return str.substring(3);
+    }
+
+
 
 	public String getBikers() throws IOException {
 		writer.println("GETBIKERS|" + Main.idTeam);
