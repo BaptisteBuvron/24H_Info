@@ -55,7 +55,7 @@ public class Livreur {
 		}
 	}
 
-	public void goToDeliverLocation(Order order) throws IOException {
+	public void goToDeliverLocation() throws IOException {
 		if (path.get(0) == null) {
 			// TODO : findPath();
 		}
