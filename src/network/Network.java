@@ -32,7 +32,7 @@ public class Network {
     public int waitStart() throws IOException {
         String fromServer = reader.readLine();
         System.out.println(fromServer);
-        return
+        return Integer.parseInt(fromServer.substring(fromServer.length() -1));
 
     }
 
