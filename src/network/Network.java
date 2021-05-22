@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import IA.Livreur;
+import IA.Main;
+
 public class Network {
 
     private Socket socket;
@@ -31,9 +34,8 @@ public class Network {
 
     public int waitStart() throws IOException {
         String fromServer = reader.readLine();
-        System.out.println(fromServer);
+//        System.out.println(fromServer);
         return Integer.parseInt(fromServer.substring(fromServer.length() -1));
-
     }
 
 
@@ -54,7 +56,12 @@ public class Network {
         String str = reader.readLine();
         System.out.println(str);
     }
-
-
+    
+    public String getBikers() throws IOException {
+    	writer.println("GETBIKERS|"+Main.idTeam);
+        String str = reader.readLine();
+        System.out.println("Debug : " +str);
+		return str;
+    }
 
 }
