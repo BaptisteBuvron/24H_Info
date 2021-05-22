@@ -10,15 +10,19 @@ public class Network {
 
     private Socket socket;
 
+    private BufferedReader reader;
+    private InputStreamReader streamReader;
+    private PrintWriter writer;
+
     public Network() throws IOException {
         this.socket = new Socket("127.0.0.1", 2121);
+        streamReader = new InputStreamReader(socket.getInputStream());
+        reader = new BufferedReader(streamReader);
+        writer = new PrintWriter(socket.getOutputStream(), true);
     }
 
     public void init() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
         String str = reader.readLine();
-        reader.close();
         System.out.println(str);
         if (str.equals("NAME")){
             name("LaSekt");
@@ -27,15 +31,12 @@ public class Network {
     }
 
     public void waitStart() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String fromServer = reader.readLine();
-        reader.close();
         System.out.println(fromServer);
     }
 
 
     public void move(int nPlayer, String direction) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
             writer.println("MOVE|"+nPlayer+"|"+direction);
@@ -45,9 +46,7 @@ public class Network {
     }
 
     public void name(String name) throws IOException {
-        try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
-            writer.println(name);
-        }
+        writer.println(name);
     }
 
 
