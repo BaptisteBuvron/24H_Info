@@ -12,12 +12,13 @@ public class Network {
 
     public Network() throws IOException {
         this.socket = new Socket("127.0.0.1", 2121);
-        init();
     }
 
     public void init() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
         String str = reader.readLine();
+        reader.close();
         System.out.println(str);
         if (str.equals("NAME")){
             name("LaSekt");
@@ -27,23 +28,25 @@ public class Network {
 
     public void waitStart() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String str = reader.readLine();
-        System.out.println(str);
+        String fromServer = reader.readLine();
+        reader.close();
+        System.out.println(fromServer);
     }
 
 
     public void move(int nPlayer, String direction) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
         try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
             writer.println("MOVE|"+nPlayer+"|"+direction);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String str = reader.readLine();
+            reader.close();
         }
     }
 
     public void name(String name) throws IOException {
         try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
             writer.println(name);
-            writer.close();
         }
     }
 
