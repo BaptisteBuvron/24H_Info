@@ -1,9 +1,7 @@
 package IA;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import map.Map;
 import network.Network;
@@ -25,21 +23,38 @@ public class Main {
 		Thread.sleep(1000);
 		ia = new Joueur();
 
+
+
 		Order[] orders = ia.getClaimableOrders();
 
 		System.out.println(orders[0]);
 
 		Livreur livreur = ia.getLivreurs(0);
+		ArrayList<ArrayList<int[]>> allPath = new ArrayList<>();
 
 		for (Order order: orders) {
 			ArrayList<int[]> path = map.findPath2(new Integer[]{livreur.getPosX(), livreur.getPosY()},new Integer[]{order.sourceX,order.sourceY});
-			for (int[] c: path) {
-			System.out.println(c[0]+";"+c[1]);
-			}
-			livreur.setPath(path);
-			livreur.setOrder(order);
-			livreur.goToDeliverLocation();
+			allPath.add(path);
 		}
+
+		int i =0;
+		Integer len = null;
+		int orderInt = 0;
+		for (ArrayList<int[]> path:allPath) {
+			if (len == null){
+				len = path.size();
+			}
+			else if (path.size()< len){
+				len = path.size();
+				orderInt = i;
+			}
+			i++;
+
+		}
+
+		livreur.setOrder(orders[orderInt]);
+		livreur.setPath(allPath.get(orderInt));
+		livreur.goToDeliverLocation();
 
 
 

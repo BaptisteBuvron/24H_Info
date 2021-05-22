@@ -7,6 +7,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import static IA.Main.ia;
+
 public class Livreur {
 
     private Order order;
@@ -108,7 +110,7 @@ public class Livreur {
             System.out.println("La commande a été prise");
             /*posX = path.get(path.size() - 2)[0];
             posY = path.get(path.size() - 2)[0];*/
-            path = Main.map.findPath(new Integer[]{posX, posY}, new Integer[]{order.destX, order.destY});
+            path = Main.map.findPath2(new Integer[]{posX, posY}, new Integer[]{order.destX, order.destY});
             System.out.println("Livrer la commande chez le client");
             goToDeliverLocation();
 
@@ -119,6 +121,39 @@ public class Livreur {
             System.out.println("Commande livrée !");
             path = null;
         }
+
+
+
+        Order[] orders = ia.getClaimableOrders();
+
+        System.out.println(orders[0]);
+
+        Livreur livreur = ia.getLivreurs(0);
+        ArrayList<ArrayList<int[]>> allPath = new ArrayList<>();
+
+        for (Order order: orders) {
+            ArrayList<int[]> path = Main.map.findPath2(new Integer[]{livreur.getPosX(), livreur.getPosY()},new Integer[]{order.sourceX,order.sourceY});
+            allPath.add(path);
+        }
+
+        int i =0;
+        Integer len = null;
+        int orderInt = 0;
+        for (ArrayList<int[]> path:allPath) {
+            if (len == null){
+                len = path.size();
+            }
+            else if (path.size()< len){
+                len = path.size();
+                orderInt = i;
+            }
+            i++;
+
+        }
+
+        livreur.setOrder(orders[orderInt]);
+        livreur.setPath(allPath.get(orderInt));
+        livreur.goToDeliverLocation();
 
 
 
