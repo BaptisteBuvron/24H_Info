@@ -1,12 +1,17 @@
 package map;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 // Java program to find path between two
 // cell in matrix
 class Path {
+    private static ArrayList<int[]> path=new ArrayList<>();
 
     // Method for finding and printing
     // whether the path exists or not
-    public static void isPath(
+    public static ArrayList<int[]> isPath(
             int matrix[][], int n) {
         // Defining visited array to keep
         // track of already visited indexes
@@ -16,30 +21,42 @@ class Path {
         // Flag to indicate whether the
         // path exists or not
         boolean flag = false;
+        path = new ArrayList<>();
+        int xStart = 0;
+        int yStart = 0;
+
 
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 // if matrix[i][j] is source
                 // and it is not visited
-                if (
-                        matrix[i][j] == 1
-                                && !visited[i][j])
+                if (matrix[i][j] == 1 && !visited[i][j]){
+                    xStart = i;
+                    yStart = j;
 
                     // Starting from i, j and
                     // then finding the path
-                    if (isPath(
-                            matrix, i, j, visited)) {
+                    if (isPath(matrix, i, j, visited)) {
                         // if path exists
                         flag = true;
                         break;
                     }
+                }
+
+
             }
         }
-        if (flag)
+        if (flag) {
             System.out.println("YES");
-        else
+            path.add(new int[]{xStart,yStart});
+            Collections.reverse(path);
+            return path;
+        }
+        else{
             System.out.println("NO");
+        }
+        return null;
     }
 
     // Method for checking boundaries
@@ -86,8 +103,10 @@ class Path {
 
             // if path is found in up
             // direction return true
-            if (up)
+            if (up){
+                path.add(new int[]{i-1,j});
                 return true;
+            }
 
             // traverse left
             boolean left
@@ -96,8 +115,11 @@ class Path {
 
             // if path is found in left
             // direction return true
-            if (left)
+            if (left){
+                path.add(new int[]{i,j-1});
                 return true;
+            }
+
 
             // traverse down
             boolean down = isPath(
@@ -105,8 +127,11 @@ class Path {
 
             // if path is found in down
             // direction return true
-            if (down)
+            if (down){
+                path.add(new int[]{i+1,j});
                 return true;
+            }
+
 
             // traverse right
             boolean right
@@ -116,8 +141,11 @@ class Path {
 
             // if path is found in right
             // direction return true
-            if (right)
+            if (right){
+                path.add(new int[]{i,j+1});
                 return true;
+            }
+
         }
         // no path has been found
         return false;

@@ -1,5 +1,6 @@
 package map;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Map {
@@ -24,7 +25,7 @@ public class Map {
         }
     }
 
-    public void findPath(Integer[] a,Integer[] b){
+    public ArrayList findPath(Integer[] a, Integer[] b){
         int[][] pathMap = new int[31][31];
         for (int i = 0; i < 31; i++) {
             for (int j = 0; j < 31; j++) {
@@ -40,7 +41,7 @@ public class Map {
         for (int[] row : pathMap){
             System.out.println(Arrays.toString(row));
         }
-        Path.isPath(pathMap,31);
+        return Path.isPath(pathMap,31);
     }
 
 }
