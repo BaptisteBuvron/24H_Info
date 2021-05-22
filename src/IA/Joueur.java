@@ -7,7 +7,7 @@ public class Joueur {
 	private Livreur[] livreurs = new Livreur[2];
 
 	public Joueur() throws IOException {
-		fetchBikers();
+		getClaimableOrders();
 	}
 
 	public void fetchBikers() throws IOException {
@@ -20,16 +20,16 @@ public class Joueur {
 		String[] biker_1_Pos = biker_1.split(delimiters);
 		String[] biker_2_Pos = biker_2.split(delimiters);
 
-		// prints the number of tokens
-//		System.out.println("Count of tokens = " + tokensVal.length);
-
 		livreurs[0] = new Livreur(Integer.parseInt(biker_1_Pos[0]), Integer.parseInt(biker_1_Pos[1]));
 		livreurs[1] = new Livreur(Integer.parseInt(biker_2_Pos[0]), Integer.parseInt(biker_2_Pos[1]));
-////		livreurs[0] = new Livreur(biker_1, 0)v
 
 		for (Livreur livreur : livreurs) {
 			System.out.println(livreur);
 		}
 	}
 
+	
+	public void getClaimableOrders() throws IOException {
+		System.out.println(Main.network.getOrders());
+	}
 }

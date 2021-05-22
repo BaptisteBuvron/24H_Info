@@ -1,7 +1,6 @@
 package IA;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 
@@ -18,17 +17,17 @@ public class Livreur {
 
 	@Override
 	public String toString() {
-		return "Livreur [orders:" + orders.stream().filter(Value -> Value != null).collect(Collectors.toList()).size()
+		return "Livreur [orders:" + getBagCapacity()
 				+ ", posX=" + posX + ", posY=" + posY + "]";
 	}
 
 	public int[] getPos() {
-		return null;
+		return new int[] {posX, posY};
 
 	}
 
-	public int[] getBag() {
-		return null;
+	public int getBagCapacity() {
+		return orders.stream().filter(Value -> Value != null).collect(Collectors.toList()).size();
 
 	}
 
