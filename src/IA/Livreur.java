@@ -1,28 +1,29 @@
 package IA;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 
 public class Livreur {
 
 	private ArrayList<Order> orders = new ArrayList<Order>(2);
+	private ArrayList<int[]> path = new ArrayList<int[]>(2);
 	int maxIndex = 0;
 	private int posX, posY;
 
 	public Livreur(int initX, int initY) {
 		posX = initX;
 		posY = initY;
+		path.set(0, null);
 	}
 
 	@Override
 	public String toString() {
-		return "Livreur [orders:" + getBagCapacity()
-				+ ", posX=" + posX + ", posY=" + posY + "]";
+		return "Livreur [orders:" + getBagCapacity() + ", posX=" + posX + ", posY=" + posY + "]";
 	}
 
 	public int[] getPos() {
-		return new int[] {posX, posY};
+		return new int[] { posX, posY };
 
 	}
 
@@ -54,9 +55,27 @@ public class Livreur {
 		}
 	}
 
-	public String thisIsTheWay(Order order) {
-		// TODO : find nearest path to where we need to pick/deliver the order
+	public void goToDeliverLocation(Order order) throws IOException {
+		if (path.get(0) == null) {
+			// TODO : findPath();
+		}
+		for (int i = 0; i < 8; i++) {
+			String dir = null;
+			if (path.get(0)[0] > posX) {
+				dir = "T";
+			} else if (path.get(0)[0] < posX) {
+				dir = "B";
+			} else if (path.get(1)[0] < posY) {
+				dir = "L";
+			} else if (path.get(1)[0] < posY) {
+				dir = "R";
+			}
+			if (dir != null) {
 
-		return null;
+				Main.network.move(0, dir);
+			} else {
+				throw new Error("Aucune Direction pour le mouvement");
+			}
+		}
 	}
 }
