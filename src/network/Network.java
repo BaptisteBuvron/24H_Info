@@ -32,22 +32,27 @@ public class Network {
     public int waitStart() throws IOException {
         String fromServer = reader.readLine();
         System.out.println(fromServer);
-        return
+        return Integer.parseInt(fromServer.substring(fromServer.length() -1));
 
     }
 
 
     public void move(int nPlayer, String direction) throws IOException {
 
-        try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
+
             writer.println("MOVE|"+nPlayer+"|"+direction);
             String str = reader.readLine();
-            reader.close();
-        }
+
     }
 
     public void name(String name) throws IOException {
         writer.println(name);
+    }
+
+    public void getMap() throws IOException {
+        writer.println("GETMAP");
+        String str = reader.readLine();
+        System.out.println(str);
     }
 
 
