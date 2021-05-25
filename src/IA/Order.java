@@ -1,6 +1,7 @@
 package IA;
 
-public class Order {
+@SuppressWarnings("rawtypes")
+public class Order implements Comparable{
 	int id, sourceX, sourceY, destX, destY, maxRound;
 	float value;
 
@@ -86,4 +87,21 @@ public class Order {
 	public void setValue(float value) {
 		this.value = value;
 	}
+	
+	@Override
+	public int compareTo(Object comparestu) {
+	        int otherValue=(int) ((Order) comparestu).getValue();
+	        /* For Ascending order*/
+//	        return (int) (this.value-otherValue);
+
+	        /* For Descending order do like this */
+	        return otherValue - (int) this.value;
+	    }
+
+//	@Override
+//	public int compareTo(Object o) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+
 }

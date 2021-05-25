@@ -1,0 +1,1 @@
+Le client de test doit être lancé après avoir lancé le serveur et appuyé sur le bouton "GO !".
