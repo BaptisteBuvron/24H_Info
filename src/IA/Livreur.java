@@ -1,11 +1,9 @@
 package IA;
 
-import network.Network;
-
 import java.io.IOException;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+
 
 import static IA.Main.ia;
 
@@ -130,7 +128,11 @@ public class Livreur {
 
         Livreur livreur = ia.getLivreurs(0);
         ArrayList<ArrayList<int[]>> allPath = new ArrayList<>();
-
+        
+        System.out.println("-".repeat(100)+ "\n" + orders[0] + "\n" + "-".repeat(100));
+        Arrays.sort(orders);
+        System.out.println("-".repeat(100)+ "\n" + orders[0] + "\n" + "-".repeat(100));
+        
         for (Order order: orders) {
             ArrayList<int[]> path = Main.map.findPath2(new Integer[]{livreur.getPosX(), livreur.getPosY()},new Integer[]{order.sourceX,order.sourceY});
             allPath.add(path);
